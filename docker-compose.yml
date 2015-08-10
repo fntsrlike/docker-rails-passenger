@@ -1,0 +1,17 @@
+web:
+  build: .
+  ports:
+   - "8080:80"
+  volumes:
+   - ./app/:/rails-app
+  links:
+   - db
+
+db:
+  image: sameersbn/mysql:latest
+  environment:
+    - DB_USER=rails
+    - DB_PASS=rails@@@
+    - DB_NAME=rails_production
+  volumes:
+    - ../rails-app/mysql:/var/lib/mysql
